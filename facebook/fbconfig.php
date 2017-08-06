@@ -16,7 +16,7 @@ use Facebook\HttpClients\FacebookHttpable;
 // init app with app id and secret
 FacebookSession::setDefaultApplication( '194737760952873','40b1566b002eb155fb083ccd842f7e34' );
 // login helper with redirect_uri
-    $helper = new FacebookRedirectLoginHelper('http://demos.krizna.com/1353/fbconfig.php' );
+    $helper = new FacebookRedirectLoginHelper('http://localhost/codeskate/facebook/fbconfig.php' );
 try {
   $session = $helper->getSessionFromRedirect();
 } catch( FacebookRequestException $ex ) {
@@ -34,14 +34,16 @@ if ( isset( $session ) ) {
      	$fbid = $graphObject->getProperty('id');              // To Get Facebook ID
  	    $fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
 	    $femail = $graphObject->getProperty('email');    // To Get Facebook email ID
+        $fusername =$graphObject->getProperty('birthday');
 	/* ---- Session Variables -----*/
 	    $_SESSION['FBID'] = $fbid;           
         $_SESSION['FULLNAME'] = $fbfullname;
 	    $_SESSION['EMAIL'] =  $femail;
+        $_SESSION['USERNAME'] = $fusername;
     /* ---- header location after session ----*/
   header("Location: index.php");
 } else {
-  $loginUrl = $helper->getLoginUrl();
+  $loginUrl = $helper->getLoginUrl(array('scope' => 'email'));
  header("Location: ".$loginUrl);
 }
 ?>
