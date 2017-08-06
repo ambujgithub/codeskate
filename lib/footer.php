@@ -20,11 +20,7 @@
 <!-- PARALLAX.JS -->
 <script type="text/javascript" src="js/parallax.js"></script>
 
-<!-- VALIDATE JQUERY CDN -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 
-<!-- VALIDATE JQUERY JS  -->
-<script type="text/javascript" src="js/validate.js"></script>
 
 <!-- BOOTSTRAP CORE JS
 ==================================== -->

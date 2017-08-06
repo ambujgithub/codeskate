@@ -3,9 +3,15 @@ jQuery('document').ready(function(){
 
     // --User Registration Form Validations--
 
+    jQuery.validator.addMethod("dob", function(value, element) {
+        return /^\d{2}\/\d{2}\/\d{4}$/.test(value);
+    }, 'Enter valid date of birth');
+
     jQuery.validator.addMethod("validname", function(value, element) {
         return /^[a-zA-Z ]+$/.test(value);
     }, 'Enter valid name');
+
+
 
     jQuery("#frm-register").validate({
         rules: {
@@ -34,11 +40,12 @@ jQuery('document').ready(function(){
                 required: true,
                 minlength: 8,
                 maxlength:20,
-                equalTo:'cpassword'
+                equalTo:'#cpassword'
             },
 
             dob:{
-                required: true
+                required: true,
+                dob:''
             }
         },
         messages: {
@@ -67,6 +74,7 @@ jQuery('document').ready(function(){
             },
             dob:{
                 required: 'You must select a date.'
+
             }
 
 

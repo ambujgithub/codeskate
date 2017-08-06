@@ -51,6 +51,13 @@
   <!-- GENERIC CSS -->
 	<link rel="stylesheet" type="text/css" href="css/generic.css">
 
+
+	<!-- VALIDATE JQUERY CDN -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+
+	<!-- VALIDATE JQUERY JS  -->
+	<script type="text/javascript" src="js/validate.js"></script>
+
 	<div id="loading-overlay">
 		<div id="spinner">
 			<i class="fa fa-spinner fa-spin fa-5x fa-fw"></i>
