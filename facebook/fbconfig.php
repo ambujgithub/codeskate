@@ -27,23 +27,23 @@ try {
 // see if we have a session
 if ( isset( $session ) ) {
   // graph api request for user data
-  $request = new FacebookRequest( $session, 'GET', '/me' );
+  $request = new FacebookRequest( $session, 'GET', '/me?fields=email,birthday' );
   $response = $request->execute();
   // get response
   $graphObject = $response->getGraphObject();
      	$fbid = $graphObject->getProperty('id');              // To Get Facebook ID
  	    $fbfullname = $graphObject->getProperty('name'); // To Get Facebook full name
 	    $femail = $graphObject->getProperty('email');    // To Get Facebook email ID
-        $fusername =$graphObject->getProperty('birthday');
+        $fbday =$graphObject->getProperty('birthday');
 	/* ---- Session Variables -----*/
 	    $_SESSION['FBID'] = $fbid;           
         $_SESSION['FULLNAME'] = $fbfullname;
 	    $_SESSION['EMAIL'] =  $femail;
-        $_SESSION['USERNAME'] = $fusername;
+        $_SESSION['BIRTHDAY'] = $fbday;
     /* ---- header location after session ----*/
   header("Location: index.php");
 } else {
-  $loginUrl = $helper->getLoginUrl(array('scope' => 'email'));
+  $loginUrl = $helper->getLoginUrl(array('scope' => 'email, user_birthday'));
  header("Location: ".$loginUrl);
 }
 ?>
