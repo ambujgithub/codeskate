@@ -22,7 +22,9 @@
 			define (DB_NAME, $enc->secureDecrypt("Mk4xYWRXSUYyYnlMdWFXZnBBRTZVQT09"));
 
 			// Connect to the database
-			self::$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die ("Error: Could not establish a secure connection to the server!");
+			// self::$mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die ("Error: Could not establish a secure connection to the server!");
+
+			self::$mysqli = mysqli_connect('localhost', 'root', 'mysql', 'codeskate') or die ("Error: Could not establish a secure connection to the server!");
 
 		}
 
@@ -55,6 +57,16 @@
 				$right_col = self::sanitize($right_col);
 				$query = "SELECT * FROM {$table_left} LEFT JOIN {$table_right} on {$table_left}.{$left_col} = {$table_right}.{$right_col}";
 			}
+			$res = self::executeQuery($query);
+			return $res;
+		}
+
+
+		public function searchContent($mode, $col_name, $value, $table_left) {
+			$table_left = self::sanitize($table_left);
+			$col_name = self::sanitize($col_name);
+			//Generate the query 
+			$query =  "SELECT * FROM {$table_left} WHERE {$col_name}='".$value."'";
 			$res = self::executeQuery($query);
 			return $res;
 		}

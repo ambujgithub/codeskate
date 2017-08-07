@@ -27,7 +27,7 @@
 				
 				<div class="col-sm-4 col-sm-offset-2 font-bold">
 				 	<div class="text-center" id="loginbox">
-				 	<h2 class="font-bold">Login</h2><br>
+				 	<h2 class="font-bold">Login</h2>
 				 	<form method="post" id="frm-login" class="form">
 				 		
 				 		<div class="form-group">
@@ -53,6 +53,19 @@
 				 		<button type="button" class="ghost-btn social-btn gplus"><i class="fa fa-google-plus" style="border-right: 1px solid #fff; padding-right: 5px;"></i>  Login</button>
 
 				 		<button type="button" class="ghost-btn social-btn twitter"><i class="fa fa-twitter" style="border-right: 1px solid #fff; padding-right: 5px;"></i>  Login</button> -->
+				 		<hr>
+				 		<p>Or, login using social media</p>
+				 		<a href="facebook/fbconfig.php" class="fg-white">
+				 			<button type="button" class="btn-lg ghost-btn" style="border-radius: 100% !important; margin-right: 15px; padding: 20px 25px;">
+				 				<span class="fa fa-facebook"></span>
+				 			</button>
+				 		</a>
+
+				 		<a href="facebook/fbconfig.php" class="fg-white">
+				 			<button type="button" class="btn-lg ghost-btn" style="border-radius: 100% !important; padding: 20px;">
+				 				<span class="fa fa-google-plus"></span>
+				 			</button>
+				 		</a>
 
 				 	</form>
 

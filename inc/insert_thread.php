@@ -16,11 +16,11 @@
 
 		// Getting all the variables
 		$thread_heading 		= addslashes($_POST['thread_heading']);
-		$thread_language_id 		= $_POST['language_tag'];
+		$thread_language_id 	= $_POST['language_tag'];
 		// $thread_content 		= addslashes(htmlspecialchars($_POST['thread_content']));
 		$thread_content 		= addslashes($_POST['thread_content']);
-		$user_id 			= $_SESSION['user_id'];
-		$timestamp 			= time();
+		$user_id 				= $_SESSION['user_id'];
+		$timestamp 				= time();
 
 		// Execute the query
 		$res 				= $db->addContent(5, 'threads', 'thread_heading', $thread_heading, 'thread_language_id', $thread_language_id, 'thread_content', $thread_content, 'user_id', $user_id, 'posted_at', $timestamp);

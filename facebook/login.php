@@ -5,6 +5,6 @@
    $_SESSION['FBID'] = NULL;
    $_SESSION['FULLNAME'] = NULL;
    $_SESSION['EMAIL'] =  NULL;
-$_SESSION['USERNAME'] =  NULL;
+   $_SESSION['USERNAME'] =  NULL;
    header("Location: index.php");        
 ?>

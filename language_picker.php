@@ -1,8 +1,5 @@
 <?php 
 
-	//----------- Looks tidy ------------
-
-
 	// Requiring the initialization file
 	require_once ("classes/init.php");
 

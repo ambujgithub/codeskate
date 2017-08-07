@@ -32,6 +32,15 @@
 			return $row;
 		}
 
+		public function loginUserFb($email){
+			// The password must be encrypted beforehand
+			$db 		= new Database();
+			$query 	= "SELECT * FROM users WHERE user_email = '".$email."'";
+			$res 		= $db::executeQuery($query);
+			$row 		= mysqli_fetch_array($res);
+			return $row;
+		}
+
 		public function getUserDetails($id){
 			$db 		= new Database();
 			return $db->fetchContentById(0, 'user_id', $id, 'users');

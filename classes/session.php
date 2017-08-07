@@ -7,6 +7,10 @@
 			session_start();
 		}
 
+		public function showSession(){
+			print_r($_SESSION);
+		}
+
 		public function setSession($var, $value){
 			$_SESSION[''.$var]	= $value;
 		}

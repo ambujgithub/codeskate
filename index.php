@@ -1,9 +1,19 @@
 
 	<?php 
+
+		// Requiring the initialization file
+		require_once ("classes/init.php");
 		session_start();
 
 		if(isset($_SESSION['user_id'])) {
 			header("Location: home.php");
+		} else {
+			$objsession 		= new Session();
+			$objsession->unsetSession('FBID');
+			$objsession->unsetSession('FULLNAME');
+			$objsession->unsetSession('EMAIL');
+			$objsession->unsetSession('USERNAME');
+			$objsession->unsetSession('isfbuser');
 		}
 	?>
 	
@@ -14,8 +24,6 @@
 	</style>
 
 <?php 
-	// Requiring the initialization file
-	require_once ("classes/init.php");
 
 	//error_reporting(0);
 

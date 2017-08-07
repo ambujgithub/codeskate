@@ -1,8 +1,20 @@
 <?php 
+	session_start();
+	require_once("../classes/init.php");
+	$objsession 	= new Session();
+	$isfbuser 		= $objsession->getSession('isfbuser');
+	$com = NULL;
+	$fname = NULL;
+	$username = NULL;
+	$encpassword = NULL;
+	$email = NULL;
+	$timestamp = NULL;
+	$dob = NULL;
+
 	error_reporting(0);
 	if(!empty($_POST['submit'])){
-		require_once("../classes/init.php");
-		$db 	= new Database();
+	
+		$db 			= new Database();
 
 		// Initialization for the encryption
 		$method = base64_decode('QUVTLTEyOC1DQkM=');
@@ -10,14 +22,22 @@
 		$iv = openssl_random_pseudo_bytes(16);
 		$enc 		= new Encrypt($method, $pass, $iv);
 
-		// Getting POST values
-		$fname 	= $db::sanitize(trim($_POST['fullname']));
-		$email 		= $db::sanitize(trim($_POST['email']));
 		$username	= $db::sanitize(trim($_POST['username']));
 		$encpassword 	= trim($enc::secureEncrypt($_POST['password']));
-		$dob 		= $db::sanitize(trim($_POST['dob']));
 		$com 		= $db->generateComCode();
 		$timestamp 	= time();
+
+		// if user is FB registered
+		if($isfbuser) {
+			$fname 		= $db::sanitize(trim($objsession->getSession('FULLNAME')));
+			$email 		= $db::sanitize(trim($objsession->getSession('EMAIL')));
+			$dob 		= $db::sanitize(trim($objsession->getSession('BIRTHDAY')));
+		} else {
+			// Getting POST values
+			$fname 		= $db::sanitize(trim($_POST['fullname']));
+			$email 		= $db::sanitize(trim($_POST['email']));
+			$dob 		= $db::sanitize(trim($_POST['dob']));
+		}
 		
 		$user 		= new Users();
 
@@ -26,7 +46,15 @@
 			header("Location:../register.php");
 		}
 
-		require_once("../sendmail.php");
+		if($isfbuser) {
+			// User need not verify his email (Auto-verify using the link)
+			$baseurl = $_SERVER['SERVER_NAME'];
+			$res 		= $db->addContent(7, 'users', 'user_name', $fname, 'user_username', $username, 'user_email', $email , 'user_dob', $dob, 'user_pass', $encpassword, 'user_com_code', $com, 'timestamp', $timestamp);
+			header("Location:http://{$baseurl}/codeskate/inc/verify_email.php?com_code={$com}");
+		} else {
+			// User needs to verify his/her email
+			require_once("../sendmail.php");
+		}
 
 	}
 ?>

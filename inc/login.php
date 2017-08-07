@@ -4,9 +4,11 @@
 		1 -> not verified
 		2 -> invalid credentials
 	*/ 
+	require_once "../classes/init.php";
+	session_start();
+	$objsession 	= new Session();
 	$arr 		= array();
 	if(!empty($_POST)) {
-		require_once "../classes/init.php";
 		error_reporting(0);
 		// Initialization for the encryption
 		$method = base64_decode('QUVTLTEyOC1DQkM=');
@@ -26,7 +28,7 @@
 		$user 		= new Users();
 		if($row 	= $user->loginUser($username, $password)){
 			// Check if user has verified his/her email id
-			$objsession 	= new Session();
+			
 			if(!empty($row['user_com_code'])){
 				// User has not verified his/her email id
 				$objsession->destroySession();
@@ -41,6 +43,15 @@
 			}
 		} else {
 			array_push($arr, 2);
+		}
+	} else if($objsession->getSession("isfbuser") && $objsession->getSession("EMAIL")!='') {
+		$db 		= new Database();
+		$email 		= $objsession->getSession("EMAIL");
+		$user 		= new Users();
+		if($row 	= $user->loginUserFb($email)){ 
+			$objsession->setSession('user_id', $row['user_id']);
+			array_push($arr, 0);
+			header("Location:../home");
 		}
 	} else {
 		header("Location:../");
